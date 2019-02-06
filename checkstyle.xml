@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ! Checkstyle-Configuration for this project.
+ !-->
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN" "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+    <property name="severity" value="warning"/>
+    <module name="TreeWalker">
+        <property name="tabWidth" value="4"/>
+        <module name="GenericIllegalRegexp">
+            <property name="severity" value="ignore"/>
+            <property name="format" value="\s+$"/>
+            <property name="message" value="Line has trailing spaces."/>
+        </module>
+
+        <!-- Annotations -->
+        <!-- every deprecation should be commented with WHY and WHAT TO DO. -->
+        <module name="MissingDeprecated"/>
+
+        <!-- Block Checks -->
+        <module name="EmptyBlock"/>
+        <module name="LeftCurly"/>
+        <module name="NeedBraces">
+            <property name="tokens" value="LITERAL_IF,LITERAL_ELSE,LITERAL_DO,LITERAL_FOR,LITERAL_WHILE"/>
+        </module>
+        <module name="RightCurly"/>
+        <!-- nested block are necessary to define namespaces (aka scopes).
+        <module name="AvoidNestedBlocks"/> -->
+
+        <!-- Class design -->
+        <module name="VisibilityModifier"/>
+        <module name="FinalClass"/>
+        <module name="InterfaceIsType"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="MutableException"/>
+
+        <!-- Coding -->
+        <!-- inline conditionals are an option to shorten code.
+        <module name="AvoidInlineConditionals"/> -->
+        <module name="CovariantEquals"/>
+        <module name="EmptyStatement"/>
+        <module name="EqualsAvoidNull"/>
+        <module name="EqualsHashCode"/>
+        <!-- the final local variable check does only make sense on primitive types.
+        <module name="FinalLocalVariable"/>-->
+        <!-- turned off hidden field check because it cannot deal with fluent setter methods.
+         ! Besides with an IDE field scopes are not a problem at all.
+        <module name="HiddenField">
+            <property name="ignoreConstructorParameter" value="true"/>
+            <property name="ignoreSetter" value="true"/>
+        </module>
+         !-->
+        <module name="IllegalInstantiation"/>
+        <module name="InnerAssignment"/>
+        <!-- considered the magic number check as too aggressive.
+        <module name="MagicNumber"/>-->
+        <module name="MissingSwitchDefault"/>
+        <module name="ModifiedControlVariable"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="StringLiteralEquality"/>
+        <module name="SuperClone"/>
+        <module name="SuperFinalize"/>
+        <module name="IllegalCatch">
+            <property name="illegalClassNames" value="java.lang.Throwable, java.lang.RuntimeException"/>
+        </module>
+        <module name="IllegalThrows"/>
+        <module name="PackageDeclaration"/>
+        <module name="DeclarationOrder"/>
+        <module name="ParameterAssignment"/>
+        <module name="DefaultComesLast"/>
+        <module name="FallThrough"/>
+        <module name="MultipleStringLiterals">
+            <property name="allowedDuplicates" value="4"/>
+        </module>
+        <module name="UnnecessaryParentheses"/>
+
+        <!-- Imports -->
+        <module name="AvoidStarImport"/>
+        <module name="AvoidStaticImport"/>
+        <module name="IllegalImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+        <!-- Javadoc Comments -->
+        <module name="JavadocType">
+            <property name="severity" value="warning"/>
+        </module>
+        <module name="JavadocMethod">
+            <property name="severity" value="warning"/>
+            <property name="excludeScope" value="private"/>
+            <property name="allowUndeclaredRTE" value="true"/>
+            <property name="allowThrowsTagsForSubclasses" value="true"/>
+            <property name="allowMissingParamTags" value="true"/>
+            <property name="allowMissingThrowsTags" value="true"/>
+            <property name="allowMissingReturnTag" value="true"/>
+            <property name="allowMissingJavadoc" value="true"/>
+            <property name="logLoadErrors" value="true"/>
+            <property name="suppressLoadErrors" value="true"/>
+        </module>
+        <module name="JavadocVariable">
+            <property name="severity" value="warning"/>
+            <property name="excludeScope" value="private"/>
+        </module>
+        <module name="JavadocStyle">
+            <property name="severity" value="warning"/>
+            <!--
+             ! The check for the first sentence is buggy. (It recognizes "/**\n" as first sentence
+             ! which is wrong is terms of http://java.sun.com/j2se/1.5.0/docs/tooldocs/windows/javadoc.html)
+             !-->
+            <property name="checkFirstSentence" value="false"/>
+        </module>
+
+        <!-- Miscellaneous -->
+        <module name="TodoComment">
+            <property name="format" value="WARNING"/>
+        </module>
+        <!-- not necessary
+        <module name="UpperEll"/>-->
+        <module name="ArrayTypeStyle"/>
+        <!-- not necessary
+        <module name="FinalParameters"/>-->
+        <module name="Indentation"/>
+
+        <!-- Modifiers -->
+        <module name="ModifierOrder"/>
+        <!-- better explicitly define the modifiers than falling back on the default modifiers.
+        <module name="RedundantModifier"/>-->
+
+        <!-- Naming -->
+        <module name="ConstantName"/>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="PackageName"/>
+        <module name="ParameterName"/>
+        <module name="StaticVariableName"/>
+        <module name="TypeName"/>
+
+        <!-- Size Violations -->
+        <module name="LineLength">
+            <property name="severity" value="ignore"/>
+        </module>
+        <module name="MethodLength"/>
+        <module name="ParameterNumber"/>
+
+        <!-- Whitespaces -->
+        <module name="GenericWhitespace"/>
+        <module name="EmptyForInitializerPad"/>
+        <module name="EmptyForIteratorPad"/>
+        <module name="MethodParamPad"/>
+        <module name="NoWhitespaceAfter">
+            <property name="allowLineBreaks" value="false"/>
+            <property name="tokens" value="BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS,TYPECAST"/>
+        </module>
+        <module name="NoWhitespaceBefore"/>
+        <!--module name="OperatorWrap"/-->
+        <module name="ParenPad"/>
+        <module name="TypecastParenPad"/>
+        <module name="WhitespaceAround">
+            <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,LITERAL_ASSERT,TYPE_EXTENSION_AND"/>
+            <property name="allowEmptyConstructors" value="true"/>
+            <property name="allowEmptyMethods" value="true"/>
+            <property name="allowEmptyTypes" value="true"/>
+        </module>
+    </module>
+    <module name="FileLength"/>
+    <module name="Translation"/>
+	<module name="NewlineAtEndOfFile">
+		<property name="lineSeparator" value="lf"/>
+	</module>
+	<module name="SuppressionFilter">
+		<property name="file" value="checkstyle-suppressions.xml"/>
+		<property name="optional" value="false"/>
+	</module>
+</module>
