@@ -22,4 +22,9 @@ public class CharacterBeingHitEvent extends Event {
     public Ability getAbility() {
         return ability;
     }
+
+    @Override
+    public String describe() {
+        return super.describe() + " " + character.describe() + " is been hit by " + ability.describe();
+    }
 }

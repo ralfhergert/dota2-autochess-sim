@@ -27,4 +27,9 @@ public class CharacterBeingDamagedEvent extends Event {
     public int getDamage() {
         return damage;
     }
+
+    @Override
+    public String describe() {
+        return super.describe() + " " + character.describe() + " is taken " + damage + " points damage from " + attacker.describe() + " to a new total of " + character.getCurrentHealth() + " HP";
+    }
 }

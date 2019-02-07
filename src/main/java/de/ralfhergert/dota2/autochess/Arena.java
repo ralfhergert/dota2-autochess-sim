@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.event.Event;
+import de.ralfhergert.dota2.autochess.log.EventLogger;
 
 public class Arena {
 
@@ -14,9 +15,15 @@ public class Arena {
     private List<Long> nextRegisteredTicks = new ArrayList<>();
 
     private List<Character> characters = new ArrayList<>();
+    private List<EventLogger> eventLoggers = new ArrayList<>();
 
     public Arena addCharacter(Character character) {
         characters.add(character);
+        return this;
+    }
+
+    public Arena addEventLogger(EventLogger logger) {
+        eventLoggers.add(logger);
         return this;
     }
 
@@ -75,6 +82,7 @@ public class Arena {
     }
 
     public Arena onEvent(Event event) {
+        eventLoggers.forEach(eventLogger -> eventLogger.onEvent(event));
         characters.forEach(character -> character.onEvent(event));
         return this;
     }

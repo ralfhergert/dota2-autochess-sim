@@ -21,4 +21,9 @@ public class CharacterGainedMana extends Event {
     public int getGainedMana() {
         return gainedMana;
     }
+
+    @Override
+    public String describe() {
+        return super.describe() + " " + character.describe() + " gains " + gainedMana + " points of Mana to a new total of " + character.getCurrentMana() + " Mana";
+    }
 }

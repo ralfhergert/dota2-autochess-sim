@@ -31,4 +31,13 @@ public class SpellDamage {
     public int getDamage() {
         return damage;
     }
+
+    @Override
+    public String toString() {
+        return "SpellDamage{damage=" + damage +
+            ", type=" + type +
+            ", piercesSpellImmunity=" + piercesSpellImmunity +
+            ", source=" + source +
+            "}";
+    }
 }

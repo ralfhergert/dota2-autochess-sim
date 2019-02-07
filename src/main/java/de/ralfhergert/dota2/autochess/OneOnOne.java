@@ -1,6 +1,7 @@
 package de.ralfhergert.dota2.autochess;
 
 import de.ralfhergert.dota2.autochess.hero.AntiMage;
+import de.ralfhergert.dota2.autochess.log.EventLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +11,7 @@ public class OneOnOne {
 
     public static void main(String... args) {
         Arena arena = new Arena()
+            .addEventLogger(new EventLogger())
             .addCharacter(new AntiMage("A", 1))
             .addCharacter(new AntiMage("B", 1))
             .initialize();

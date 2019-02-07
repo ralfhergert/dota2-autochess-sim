@@ -13,11 +13,15 @@ import de.ralfhergert.dota2.autochess.modifier.Invisibility;
 import de.ralfhergert.dota2.autochess.modifier.Modifier;
 import de.ralfhergert.dota2.autochess.modifier.ReceivingAutoAttackDamageModifier;
 import de.ralfhergert.dota2.autochess.modifier.ReceivingSpellDamageModifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Character {
+
+    private static final Logger LOG = LoggerFactory.getLogger(Character.class);
 
     private final String team;
     private int maxHealth;
@@ -57,9 +61,11 @@ public class Character {
             return this; // nothing to do character is dead
         }
         if (currentTarget == null || !currentTarget.isAlive()) {
+            LOG.info("{} trying to find a target in arena", describe());
             currentTarget = findNextLivingTarget(arena);
         }
         if (currentTarget == null) {
+            LOG.info("{} having no current target in arena", describe());
             return this; // no more target in arena.
         }
         abilities.forEach(ability -> ability.performOn(arena));
@@ -151,6 +157,10 @@ public class Character {
         this.currentMana = currentMana;
     }
 
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +
@@ -162,5 +172,9 @@ public class Character {
             ", abilities=" + abilities +
             ", modifiers=" + modifiers +
             '}';
+    }
+
+    public String describe() {
+        return getClass().getSimpleName() + " from " + team;
     }
 }

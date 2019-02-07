@@ -11,4 +11,9 @@ public class CharacterDiedEvent extends Event {
         super(arena);
         this.character = character;
     }
+
+    @Override
+    public String describe() {
+        return super.describe() + " " + character.describe() + " died";
+    }
 }

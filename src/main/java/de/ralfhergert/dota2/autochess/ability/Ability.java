@@ -21,4 +21,8 @@ public class Ability {
     public void performOn(Arena arena) {}
 
     public void onEvent(Event event) {}
+
+    public String describe() {
+        return "(" + getClass().getSimpleName() + " from " + owner.describe() + ")";
+    }
 }
