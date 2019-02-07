@@ -8,7 +8,9 @@ import de.ralfhergert.dota2.autochess.damage.SpellDamage;
 import de.ralfhergert.dota2.autochess.event.CharacterBeingDamagedEvent;
 import de.ralfhergert.dota2.autochess.event.CharacterBeingHitEvent;
 import de.ralfhergert.dota2.autochess.event.CharacterDiedEvent;
+import de.ralfhergert.dota2.autochess.event.CharacterEvadedAttackEvent;
 import de.ralfhergert.dota2.autochess.event.Event;
+import de.ralfhergert.dota2.autochess.modifier.ChanceOfBeingHitModifier;
 import de.ralfhergert.dota2.autochess.modifier.Invisibility;
 import de.ralfhergert.dota2.autochess.modifier.Modifier;
 import de.ralfhergert.dota2.autochess.modifier.ReceivingAutoAttackDamageModifier;
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Character {
 
@@ -47,6 +50,15 @@ public class Character {
     public Character addAbility(Ability ability) {
         ability.setOwner(this);
         abilities.add(ability);
+        return this;
+    }
+
+    public Stream<Ability> getAbilities() {
+        return abilities.stream();
+    }
+
+    public Character addModifier(Modifier modifier) {
+        modifiers.add(modifier);
         return this;
     }
 
@@ -96,7 +108,17 @@ public class Character {
     }
 
     public Character tryToInflictDamage(Arena arena, AutoAttackAbility ability, AutoAttackDamage autoAttackDamage) {
-        // character may evade the attack.
+        double chanceOfBeingHit = 1;
+        for (Modifier modifier : modifiers) {
+            if (modifier instanceof ChanceOfBeingHitModifier) {
+                chanceOfBeingHit = ((ChanceOfBeingHitModifier)modifier).modChanceOfBeingHit(chanceOfBeingHit);
+            }
+        }
+        if (arena.getRandom().nextDouble() >= chanceOfBeingHit) { // character evaded the attack.
+            arena.onEvent(new CharacterEvadedAttackEvent(arena, this, ability));
+            return this;
+        }
+
         arena.onEvent(new CharacterBeingHitEvent(arena, this, ability));
         AutoAttackDamage damage = autoAttackDamage;
         for (Modifier modifier : modifiers) {

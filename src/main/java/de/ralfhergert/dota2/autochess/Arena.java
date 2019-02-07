@@ -2,6 +2,7 @@ package de.ralfhergert.dota2.autochess;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,6 +11,8 @@ import de.ralfhergert.dota2.autochess.event.Event;
 import de.ralfhergert.dota2.autochess.log.EventLogger;
 
 public class Arena {
+
+    private final Random random = new Random();
 
     private long currentTickMs = 0;
     private List<Long> nextRegisteredTicks = new ArrayList<>();
@@ -65,6 +68,10 @@ public class Arena {
         return characters.stream().filter(character -> !character.getTeam().equals(team));
     }
 
+    public Stream<Character> getAllOfTeam(String team) {
+        return characters.stream().filter(character -> character.getTeam().equals(team));
+    }
+
     public String getWinningTeam() {
         return characters.stream()
             .filter(Character::isAlive)
@@ -85,6 +92,10 @@ public class Arena {
         eventLoggers.forEach(eventLogger -> eventLogger.onEvent(event));
         characters.forEach(character -> character.onEvent(event));
         return this;
+    }
+
+    public Random getRandom() {
+        return random;
     }
 
     @Override
