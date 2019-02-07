@@ -3,11 +3,9 @@ package de.ralfhergert.dota2.autochess.ability;
 import de.ralfhergert.dota2.autochess.Arena;
 import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.damage.AutoAttackDamage;
+import de.ralfhergert.dota2.autochess.modifier.AutoAttackDamageModifier;
 import de.ralfhergert.dota2.autochess.modifier.CooldownModifier;
-import de.ralfhergert.dota2.autochess.modifier.Modifier;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class AutoAttackAbility extends Ability implements DamageAbility {
@@ -17,8 +15,6 @@ public class AutoAttackAbility extends Ability implements DamageAbility {
     private long cooldownMs;
     private int maxRange;
     private long availableOnTick;
-
-    private List<Modifier> modifiers = new ArrayList<>();
 
     public AutoAttackAbility(int minDamage, int maxDamage, long cooldownMs, int maxRange) {
         this.minDamage = minDamage;
@@ -39,7 +35,7 @@ public class AutoAttackAbility extends Ability implements DamageAbility {
             getOwner().getCurrentTarget().isVisible() &&
             availableOnTick <= arena.getCurrentTickMs()) {
             // try to inflict damage.
-            getOwner().getCurrentTarget().tryToInflictDamage(arena, this, new AutoAttackDamage(getPotentialDamage(), getOwner()));
+            getOwner().getCurrentTarget().tryToInflictDamage(arena, this, getOwner().applyModifiers(new AutoAttackDamage(getPotentialDamage(), getOwner()), AutoAttackDamageModifier.class));
             // calculate and register the next strike.
             availableOnTick = arena.getCurrentTickMs() + getNextAvailabilityDelta();
             arena.registerTick(availableOnTick);
@@ -47,13 +43,7 @@ public class AutoAttackAbility extends Ability implements DamageAbility {
     }
 
     public long getNextAvailabilityDelta() {
-        long delta = cooldownMs;
-        for (Modifier modifier : modifiers) {
-            if (modifier instanceof CooldownModifier) {
-                delta = ((CooldownModifier) modifier).modify(delta);
-            }
-        }
-        return delta;
+        return getOwner().applyModifiers(cooldownMs, CooldownModifier.class);
     }
 
     public int getPotentialDamage() {

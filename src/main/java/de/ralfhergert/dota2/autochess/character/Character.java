@@ -176,7 +176,7 @@ public class Character {
     /**
      * This method will run the given value through all modifiers which match the given modifierClass.
      */
-    private <Type> Type applyModifiers(Type value, Class<? extends Modifier<Type>> modifierClass) {
+    public <Type> Type applyModifiers(Type value, Class<? extends Modifier<Type>> modifierClass) {
         Type currentValue = value;
         for (Modifier modifier : modifiers) {
             if (modifierClass.isInstance(modifier)) {
