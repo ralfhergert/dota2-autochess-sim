@@ -50,7 +50,7 @@ public class AutoAttackAbility extends Ability implements DamageAbility {
         long delta = cooldownMs;
         for (Modifier modifier : modifiers) {
             if (modifier instanceof CooldownModifier) {
-                delta = ((CooldownModifier) modifier).modCooldown(delta);
+                delta = ((CooldownModifier) modifier).modify(delta);
             }
         }
         return delta;

@@ -1,9 +1,7 @@
 package de.ralfhergert.dota2.autochess.modifier;
 
-public interface ChanceOfBeingHitModifier {
-
-    /**
-     * @param chanceOfBeingHit 0 is 0% and 1.0 is 100%
-     */
-    double modChanceOfBeingHit(double chanceOfBeingHit);
-}
+/**
+ * This is a marker-interface for all modifiers of the "chance of being hit".
+ * Chance of being hit is given as double thus 0 equals 0% and 1 equals 100%.
+ */
+public interface ChanceOfBeingHitModifier extends Modifier<Double> {}

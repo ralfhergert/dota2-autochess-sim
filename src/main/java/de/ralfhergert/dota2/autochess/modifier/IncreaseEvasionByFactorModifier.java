@@ -1,6 +1,6 @@
 package de.ralfhergert.dota2.autochess.modifier;
 
-public class IncreaseEvasionByFactorModifier extends Modifier implements ChanceOfBeingHitModifier {
+public class IncreaseEvasionByFactorModifier extends TimedModifier<Double> implements ChanceOfBeingHitModifier {
 
     private final double factor;
 
@@ -14,7 +14,7 @@ public class IncreaseEvasionByFactorModifier extends Modifier implements ChanceO
     }
 
     @Override
-    public double modChanceOfBeingHit(double chanceOfBeingHit) {
+    public Double modify(Double chanceOfBeingHit) {
         return chanceOfBeingHit * (1 - factor);
     }
 }

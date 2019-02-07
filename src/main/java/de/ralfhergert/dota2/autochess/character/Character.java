@@ -111,7 +111,7 @@ public class Character {
         double chanceOfBeingHit = 1;
         for (Modifier modifier : modifiers) {
             if (modifier instanceof ChanceOfBeingHitModifier) {
-                chanceOfBeingHit = ((ChanceOfBeingHitModifier)modifier).modChanceOfBeingHit(chanceOfBeingHit);
+                chanceOfBeingHit = ((ChanceOfBeingHitModifier)modifier).modify(chanceOfBeingHit);
             }
         }
         if (arena.getRandom().nextDouble() >= chanceOfBeingHit) { // character evaded the attack.
@@ -123,7 +123,7 @@ public class Character {
         AutoAttackDamage damage = autoAttackDamage;
         for (Modifier modifier : modifiers) {
             if (modifier instanceof ReceivingAutoAttackDamageModifier) {
-                autoAttackDamage = ((ReceivingAutoAttackDamageModifier)modifier).modDamage(autoAttackDamage);
+                autoAttackDamage = ((ReceivingAutoAttackDamageModifier)modifier).modify(autoAttackDamage);
             }
         }
         final int healthBefore = currentHealth;
@@ -143,7 +143,7 @@ public class Character {
         SpellDamage damage = spellDamage;
         for (Modifier modifier : modifiers) {
             if (modifier instanceof ReceivingAutoAttackDamageModifier) {
-                damage = ((ReceivingSpellDamageModifier)modifier).modDamage(damage);
+                damage = ((ReceivingSpellDamageModifier)modifier).modify(damage);
             }
         }
         final int healthBefore = currentHealth;

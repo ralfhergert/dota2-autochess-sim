@@ -2,7 +2,7 @@ package de.ralfhergert.dota2.autochess.modifier;
 
 import de.ralfhergert.dota2.autochess.damage.SpellDamage;
 
-public interface ReceivingSpellDamageModifier {
-
-    SpellDamage modDamage(SpellDamage current);
-}
+/**
+ * This is a marker interface for all modifiers of "spell damage".
+ */
+public interface ReceivingSpellDamageModifier extends Modifier<SpellDamage> {}
