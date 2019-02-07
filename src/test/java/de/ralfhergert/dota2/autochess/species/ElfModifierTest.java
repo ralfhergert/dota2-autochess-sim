@@ -31,12 +31,12 @@ public class ElfModifierTest {
         Assert.assertEquals("number of AntiMages in team A", 3, arena.getAllOfTeam("A")
             .filter(character -> character instanceof AntiMage)
             .peek(character -> Assert.assertEquals("AnitMage should have one ChanceOfBeingHitModifier", 1,
-                character.getModifiers().filter(ability -> ability instanceof ChanceOfBeingHitModifier).count()))
+                character.getModifiers().filter(modifier -> modifier instanceof ChanceOfBeingHitModifier).count()))
             .count());
         Assert.assertEquals("number of BatRider in team A", 1, arena.getAllOfTeam("A")
             .filter(character -> character instanceof BatRider)
             .peek(character -> Assert.assertTrue("has no ChanceOfBeingHitModifier",
-                character.getModifiers().noneMatch(ability -> ability instanceof ChanceOfBeingHitModifier)))
+                character.getModifiers().noneMatch(modifier -> modifier instanceof ChanceOfBeingHitModifier)))
             .count());
     }
 }
