@@ -11,7 +11,7 @@ import de.ralfhergert.dota2.autochess.event.CharacterDiedEvent;
 import de.ralfhergert.dota2.autochess.event.CharacterEvadedAttackEvent;
 import de.ralfhergert.dota2.autochess.event.Event;
 import de.ralfhergert.dota2.autochess.modifier.ChanceOfBeingHitModifier;
-import de.ralfhergert.dota2.autochess.modifier.Invisibility;
+import de.ralfhergert.dota2.autochess.modifier.VisibilityModifier;
 import de.ralfhergert.dota2.autochess.modifier.Modifier;
 import de.ralfhergert.dota2.autochess.modifier.ReceivingAutoAttackDamageModifier;
 import de.ralfhergert.dota2.autochess.modifier.ReceivingSpellDamageModifier;
@@ -62,6 +62,10 @@ public class Character {
         return this;
     }
 
+    public Stream<Modifier> getModifiers() {
+        return modifiers.stream();
+    }
+
     public Character initialize(Arena arena) {
         abilities.forEach(ability -> ability.initialize(arena));
         modifiers.forEach(modifier -> modifier.initialize(arena));
@@ -104,28 +108,18 @@ public class Character {
     }
 
     public boolean isVisible() {
-        return modifiers.stream().noneMatch(modifier -> modifier instanceof Invisibility);
+        return applyModifiers(true, VisibilityModifier.class);
     }
 
     public Character tryToInflictDamage(Arena arena, AutoAttackAbility ability, AutoAttackDamage autoAttackDamage) {
-        double chanceOfBeingHit = 1;
-        for (Modifier modifier : modifiers) {
-            if (modifier instanceof ChanceOfBeingHitModifier) {
-                chanceOfBeingHit = ((ChanceOfBeingHitModifier)modifier).modify(chanceOfBeingHit);
-            }
-        }
+        final double chanceOfBeingHit = applyModifiers(1.0, ChanceOfBeingHitModifier.class);
         if (arena.getRandom().nextDouble() >= chanceOfBeingHit) { // character evaded the attack.
             arena.onEvent(new CharacterEvadedAttackEvent(arena, this, ability));
             return this;
         }
-
         arena.onEvent(new CharacterBeingHitEvent(arena, this, ability));
-        AutoAttackDamage damage = autoAttackDamage;
-        for (Modifier modifier : modifiers) {
-            if (modifier instanceof ReceivingAutoAttackDamageModifier) {
-                autoAttackDamage = ((ReceivingAutoAttackDamageModifier)modifier).modify(autoAttackDamage);
-            }
-        }
+
+        final AutoAttackDamage damage = applyModifiers(autoAttackDamage, ReceivingAutoAttackDamageModifier.class);
         final int healthBefore = currentHealth;
         currentHealth -= Math.max(0, damage.getDamage() - getArmor());
         if (healthBefore > currentHealth) {
@@ -140,12 +134,8 @@ public class Character {
     public Character tryToInflictDamage(Arena arena, Ability ability, SpellDamage spellDamage) {
         // character may evade the attack.
         arena.onEvent(new CharacterBeingHitEvent(arena, this, ability));
-        SpellDamage damage = spellDamage;
-        for (Modifier modifier : modifiers) {
-            if (modifier instanceof ReceivingAutoAttackDamageModifier) {
-                damage = ((ReceivingSpellDamageModifier)modifier).modify(damage);
-            }
-        }
+        SpellDamage damage = applyModifiers(spellDamage, ReceivingSpellDamageModifier.class);
+
         final int healthBefore = currentHealth;
         currentHealth -= Math.max(0, damage.getDamage());
         if (healthBefore > currentHealth) {
@@ -181,6 +171,19 @@ public class Character {
 
     public int getCurrentHealth() {
         return currentHealth;
+    }
+
+    /**
+     * This method will run the given value through all modifiers which match the given modifierClass.
+     */
+    private <Type> Type applyModifiers(Type value, Class<? extends Modifier<Type>> modifierClass) {
+        Type currentValue = value;
+        for (Modifier modifier : modifiers) {
+            if (modifierClass.isInstance(modifier)) {
+                currentValue = modifierClass.cast(modifier).modify(currentValue);
+            }
+        }
+        return currentValue;
     }
 
     @Override

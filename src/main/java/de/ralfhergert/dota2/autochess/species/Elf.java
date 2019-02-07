@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
  */
 public class Elf extends Ability {
 
+    private static final IncreaseEvasionByFactorModifier bonusFor3 = new IncreaseEvasionByFactorModifier(0.25);
+    private static final IncreaseEvasionByFactorModifier bonusFor6 = new IncreaseEvasionByFactorModifier(0.25);
+
     @Override
     public void initialize(Arena arena) {
         final List<Character> elfsInTeam = arena.getAllOfTeam(getOwner().getTeam())
@@ -22,10 +25,18 @@ public class Elf extends Ability {
             .collect(Collectors.toList());
 
         if (elfsInTeam.size() >= 3) {
-            elfsInTeam.forEach(character -> character.addModifier(new IncreaseEvasionByFactorModifier(0.25)));
+            elfsInTeam.forEach(character -> {
+                if (character.getModifiers().noneMatch(modifier -> modifier.equals(bonusFor3))) {
+                    character.addModifier(bonusFor3);
+                }
+            });
         }
         if (elfsInTeam.size() >= 6) {
-            elfsInTeam.forEach(character -> character.addModifier(new IncreaseEvasionByFactorModifier(0.25)));
+            elfsInTeam.forEach(character -> {
+                if (character.getModifiers().noneMatch(modifier -> modifier.equals(bonusFor6))) {
+                    character.addModifier(bonusFor6);
+                }
+            });
         }
     }
 }
