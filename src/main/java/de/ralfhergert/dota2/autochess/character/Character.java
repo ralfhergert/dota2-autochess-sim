@@ -119,7 +119,7 @@ public class Character {
             }
         }
         final int healthBefore = currentHealth;
-        currentHealth -= Math.min(0, damage.getDamage() - getArmor());
+        currentHealth -= Math.max(0, damage.getDamage());
         if (healthBefore > currentHealth) {
             arena.onEvent(new CharacterBeingDamagedEvent(arena, this, damage.getSource(), healthBefore - currentHealth));
         }

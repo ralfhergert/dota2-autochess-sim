@@ -18,7 +18,7 @@ public class ManaRegeneration extends Ability {
                 getOwner().equals(beingDamagedEvent.getCharacter())) {
                 final int manaGain = beingDamagedEvent.getDamage() / 10;
                 final int manaBefore = getOwner().getCurrentMana();
-                final int manaAfter = Math.max(getOwner().getMaxMana(), manaBefore + manaGain);
+                final int manaAfter = Math.min(getOwner().getMaxMana(), manaBefore + manaGain);
                 getOwner().setCurrentMana(manaAfter);
                 if (manaBefore < manaAfter) {
                     event.getArena().onEvent(new CharacterGainedMana(event.getArena(), getOwner(), manaAfter - manaBefore));
