@@ -1,6 +1,5 @@
 package de.ralfhergert.dota2.autochess.classes;
 
-import de.ralfhergert.dota2.autochess.Arena;
 import de.ralfhergert.dota2.autochess.ability.Ability;
 import de.ralfhergert.dota2.autochess.species.Demon;
 
