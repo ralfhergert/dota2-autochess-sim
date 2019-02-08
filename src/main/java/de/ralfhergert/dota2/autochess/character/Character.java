@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class Character {
@@ -64,6 +65,10 @@ public class Character {
 
     public Stream<Modifier> getModifiers() {
         return modifiers.stream();
+    }
+
+    public void removeModifier(Predicate<Modifier> predicate) {
+        modifiers.removeIf(predicate);
     }
 
     public Character initialize(Arena arena) {

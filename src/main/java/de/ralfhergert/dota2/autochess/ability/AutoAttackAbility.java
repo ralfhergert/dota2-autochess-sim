@@ -5,7 +5,6 @@ import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.damage.AutoAttackDamage;
 import de.ralfhergert.dota2.autochess.modifier.AutoAttackDamageModifier;
 import de.ralfhergert.dota2.autochess.modifier.AutoAttackSpeedModifier;
-import de.ralfhergert.dota2.autochess.modifier.CooldownModifier;
 
 import java.util.Random;
 

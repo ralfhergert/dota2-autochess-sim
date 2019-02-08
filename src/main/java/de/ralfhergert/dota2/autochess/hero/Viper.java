@@ -1,13 +1,10 @@
 package de.ralfhergert.dota2.autochess.hero;
 
 import de.ralfhergert.dota2.autochess.ability.AutoAttackAbility;
-import de.ralfhergert.dota2.autochess.ability.ManaBreak;
 import de.ralfhergert.dota2.autochess.ability.ManaRegeneration;
 import de.ralfhergert.dota2.autochess.character.Character;
-import de.ralfhergert.dota2.autochess.classes.DemonHunter;
 import de.ralfhergert.dota2.autochess.progression.DoubleEachLevel;
 import de.ralfhergert.dota2.autochess.species.Dragon;
-import de.ralfhergert.dota2.autochess.species.Elf;
 
 public class Viper extends Character {
 
