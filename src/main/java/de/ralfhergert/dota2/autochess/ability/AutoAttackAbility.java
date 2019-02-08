@@ -4,6 +4,7 @@ import de.ralfhergert.dota2.autochess.Arena;
 import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.damage.AutoAttackDamage;
 import de.ralfhergert.dota2.autochess.modifier.AutoAttackDamageModifier;
+import de.ralfhergert.dota2.autochess.modifier.AutoAttackSpeedModifier;
 import de.ralfhergert.dota2.autochess.modifier.CooldownModifier;
 
 import java.util.Random;
@@ -43,7 +44,7 @@ public class AutoAttackAbility extends Ability implements DamageAbility {
     }
 
     public long getNextAvailabilityDelta() {
-        return getOwner().applyModifiers(cooldownMs, CooldownModifier.class);
+        return getOwner().applyModifiers(cooldownMs, AutoAttackSpeedModifier.class);
     }
 
     public int getPotentialDamage() {
