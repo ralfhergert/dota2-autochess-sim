@@ -16,7 +16,7 @@ public class Furion extends Character {
         super(team, new DoubleEachLevel(level).of(500), 0, 0);
         addAbility(new Elf());
         addAbility(new Druid());
-        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(45), new DoubleEachLevel(level).of(50), (long)(1000/1.4), 400));
+        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(45), new DoubleEachLevel(level).of(50), (long)(1000 / 1.4), 400));
         addAbility(new ManaRegeneration());
         // TODO addAbility(?);
     }

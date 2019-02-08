@@ -16,7 +16,7 @@ public class Terrorblade extends Character {
         super(team, new DoubleEachLevel(level).of(650), 5, 0);
         addAbility(new Demon());
         addAbility(new DemonHunter());
-        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(45), new DoubleEachLevel(level).of(65), (long)(1000/1.4), 205));
+        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(45), new DoubleEachLevel(level).of(65), (long)(1000 / 1.4), 205));
         addAbility(new ManaRegeneration());
         // TODO addAbility(?);
     }

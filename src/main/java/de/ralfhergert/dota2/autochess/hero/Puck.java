@@ -17,7 +17,7 @@ public class Puck extends Character {
         addAbility(new Elf());
         addAbility(new Dragon());
         // TODO addAbility(new Mage());
-        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(40), new DoubleEachLevel(level).of(50), (long)(1000/1.7), 400));
+        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(40), new DoubleEachLevel(level).of(50), (long)(1000 / 1.7), 400));
         addAbility(new ManaRegeneration());
         //addAbility(new IllusoryOrb(level));
     }

@@ -15,7 +15,7 @@ public class Viper extends Character {
         super(team, new DoubleEachLevel(level).of(550), 5, 20);
         addAbility(new Dragon());
         // TODO addAbility(new Assassin());
-        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(50), new DoubleEachLevel(level).of(60), (long)(1000), 400));
+        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(50), new DoubleEachLevel(level).of(60), (long)(1000 / 1.0), 400));
         addAbility(new ManaRegeneration());
         // TODO addAbility(new ViperStrike(level));
     }

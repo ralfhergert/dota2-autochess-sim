@@ -16,7 +16,7 @@ public class DragonKnight extends Character {
         // TODO addAbility(new Human());
         addAbility(new Dragon());
         // TODO addAbility(new Knight());
-        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(50), new DoubleEachLevel(level).of(60), (long)(1000/1.2), 205));
+        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(50), new DoubleEachLevel(level).of(60), (long)(1000 / 1.2), 205));
         addAbility(new ManaRegeneration());
         //addAbility(new ElderDragonForm(level));
     }

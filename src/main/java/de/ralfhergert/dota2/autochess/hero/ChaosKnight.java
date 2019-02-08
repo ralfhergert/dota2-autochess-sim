@@ -15,7 +15,7 @@ public class ChaosKnight extends Character {
         super(team, new DoubleEachLevel(level).of(750), 5, 0);
         addAbility(new Demon());
         // TODO addAbility(new Knight());
-        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(40), new DoubleEachLevel(level).of(110), (long)(1000/1.3), 205));
+        addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(40), new DoubleEachLevel(level).of(110), (long)(1000 / 1.3), 205));
         addAbility(new ManaRegeneration());
         // TODO addAbility(new ChaosBolt());
     }
