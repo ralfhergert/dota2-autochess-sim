@@ -8,6 +8,9 @@ import de.ralfhergert.dota2.autochess.classes.DemonHunter;
 import de.ralfhergert.dota2.autochess.progression.DoubleEachLevel;
 import de.ralfhergert.dota2.autochess.species.Elf;
 
+/**
+ * The hero Anti Mage.
+ */
 public class AntiMage extends Character {
 
     public AntiMage(String team, int level) {

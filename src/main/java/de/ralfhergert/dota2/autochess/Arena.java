@@ -10,6 +10,9 @@ import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.event.Event;
 import de.ralfhergert.dota2.autochess.log.EventLogger;
 
+/**
+ * An arena is in which a fight takes place.
+ */
 public class Arena {
 
     private final Random random = new Random();

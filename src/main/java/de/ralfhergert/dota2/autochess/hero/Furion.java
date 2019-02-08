@@ -7,6 +7,9 @@ import de.ralfhergert.dota2.autochess.classes.Druid;
 import de.ralfhergert.dota2.autochess.progression.DoubleEachLevel;
 import de.ralfhergert.dota2.autochess.species.Elf;
 
+/**
+ * The hero Furion.
+ */
 public class Furion extends Character {
 
     public Furion(String team, int level) {

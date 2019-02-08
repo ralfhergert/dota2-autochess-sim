@@ -4,6 +4,9 @@ import de.ralfhergert.dota2.autochess.event.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This logger writes events as log messages.
+ */
 public class EventLogger {
 
     private static final Logger LOG = LoggerFactory.getLogger(EventLogger.class);

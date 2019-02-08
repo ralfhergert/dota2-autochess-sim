@@ -6,6 +6,9 @@ import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.progression.DoubleEachLevel;
 import de.ralfhergert.dota2.autochess.species.Demon;
 
+/**
+ * The hero Chaos Knight.
+ */
 public class ChaosKnight extends Character {
 
     public ChaosKnight(String team, int level) {

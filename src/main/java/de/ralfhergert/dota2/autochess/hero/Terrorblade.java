@@ -7,6 +7,9 @@ import de.ralfhergert.dota2.autochess.classes.DemonHunter;
 import de.ralfhergert.dota2.autochess.progression.DoubleEachLevel;
 import de.ralfhergert.dota2.autochess.species.Demon;
 
+/**
+ * The hero Terrorblade.
+ */
 public class Terrorblade extends Character {
 
     public Terrorblade(String team, int level) {

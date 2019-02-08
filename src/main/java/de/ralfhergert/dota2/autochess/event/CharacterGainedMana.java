@@ -3,6 +3,9 @@ package de.ralfhergert.dota2.autochess.event;
 import de.ralfhergert.dota2.autochess.Arena;
 import de.ralfhergert.dota2.autochess.character.Character;
 
+/**
+ * This event is fired whenever a {@link Character} gains mana.
+ */
 public class CharacterGainedMana extends Event {
 
     private final Character character;

@@ -6,6 +6,9 @@ import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.progression.DoubleEachLevel;
 import de.ralfhergert.dota2.autochess.species.Troll;
 
+/**
+ * The hero Bat Rider.
+ */
 public class BatRider extends Character {
 
     public BatRider(String team, int level) {

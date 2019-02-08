@@ -5,6 +5,9 @@ import de.ralfhergert.dota2.autochess.log.EventLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This one-on-one-runner lets two characters fight against each other.
+ */
 public class OneOnOne {
 
     private static final Logger LOG = LoggerFactory.getLogger(OneOnOne.class);

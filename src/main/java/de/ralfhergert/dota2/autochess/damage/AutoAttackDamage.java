@@ -2,6 +2,9 @@ package de.ralfhergert.dota2.autochess.damage;
 
 import de.ralfhergert.dota2.autochess.character.Character;
 
+/**
+ * This class carries the damage dealt by a single auto attack.
+ */
 public class AutoAttackDamage {
 
     private final int damage;

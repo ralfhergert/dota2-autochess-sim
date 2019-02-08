@@ -1,5 +1,8 @@
 package de.ralfhergert.dota2.autochess.modifier;
 
+/**
+ * This modifier effects the "chance of being hit".
+ */
 public class IncreaseEvasionByFactorModifier extends TimedModifier<Double> implements ChanceOfBeingHitModifier {
 
     private final double factor;

@@ -2,6 +2,9 @@ package de.ralfhergert.dota2.autochess.event;
 
 import de.ralfhergert.dota2.autochess.Arena;
 
+/**
+ * This is the super-class of all events.
+ */
 public class Event {
 
     private final Arena arena;

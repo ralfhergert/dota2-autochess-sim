@@ -4,6 +4,9 @@ import de.ralfhergert.dota2.autochess.Arena;
 import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.event.Event;
 
+/**
+ * This is the super-class for all abilities.
+ */
 public class Ability {
 
     private Character owner;

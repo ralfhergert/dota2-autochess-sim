@@ -8,6 +8,9 @@ import de.ralfhergert.dota2.autochess.modifier.AutoAttackSpeedModifier;
 
 import java.util.Random;
 
+/**
+ * This auto attack ability lets characters do melee damage.
+ */
 public class AutoAttackAbility extends Ability implements DamageAbility {
 
     private int minDamage;

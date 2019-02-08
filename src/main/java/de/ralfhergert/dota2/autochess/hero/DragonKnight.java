@@ -6,6 +6,9 @@ import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.progression.DoubleEachLevel;
 import de.ralfhergert.dota2.autochess.species.Dragon;
 
+/**
+ * The hero Dragon Knight.
+ */
 public class DragonKnight extends Character {
 
     public DragonKnight(String team, int level) {

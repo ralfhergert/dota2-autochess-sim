@@ -7,6 +7,9 @@ import de.ralfhergert.dota2.autochess.progression.DoubleEachLevel;
 import de.ralfhergert.dota2.autochess.species.Dragon;
 import de.ralfhergert.dota2.autochess.species.Elf;
 
+/**
+ * The hero Puck.
+ */
 public class Puck extends Character {
 
     public Puck(String team, int level) {

@@ -1,5 +1,10 @@
 package de.ralfhergert.dota2.autochess.progression;
 
+/**
+ * This class implements to double a value for each level.
+ * Starting level is 1 at which the value is kept as it is.
+ * Equation is: value * (2^(level-1))
+ */
 public class DoubleEachLevel {
 
     private final int factor;

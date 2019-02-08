@@ -4,6 +4,9 @@ import de.ralfhergert.dota2.autochess.Arena;
 import de.ralfhergert.dota2.autochess.ability.Ability;
 import de.ralfhergert.dota2.autochess.character.Character;
 
+/**
+ * This event is fired whenever a {@link Character} evades a hit.
+ */
 public class CharacterEvadedAttackEvent extends Event {
 
     private final Character character;

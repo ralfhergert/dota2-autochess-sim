@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+/**
+ * A character is a chess piece on board.
+ */
 public class Character {
 
     private static final Logger LOG = LoggerFactory.getLogger(Character.class);

@@ -6,6 +6,9 @@ import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.progression.DoubleEachLevel;
 import de.ralfhergert.dota2.autochess.species.Elf;
 
+/**
+ * The hero Luna.
+ */
 public class Luna extends Character {
 
     public Luna(String team, int level) {
