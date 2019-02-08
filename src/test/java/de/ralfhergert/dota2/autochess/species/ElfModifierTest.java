@@ -4,6 +4,8 @@ import de.ralfhergert.dota2.autochess.Arena;
 import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.hero.AntiMage;
 import de.ralfhergert.dota2.autochess.hero.BatRider;
+import de.ralfhergert.dota2.autochess.hero.Furion;
+import de.ralfhergert.dota2.autochess.hero.Luna;
 import de.ralfhergert.dota2.autochess.modifier.ChanceOfBeingHitModifier;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,17 +22,17 @@ public class ElfModifierTest {
     public void testTripleElfModifier() {
         Arena arena = new Arena()
             .addCharacter(new AntiMage("A", 1))
-            .addCharacter(new AntiMage("A", 1))
-            .addCharacter(new AntiMage("A", 1))
+            .addCharacter(new Furion("A", 1))
+            .addCharacter(new Luna("A", 1))
             .addCharacter(new BatRider("A", 1))
             .addCharacter(new AntiMage("B", 1))
             .initialize();
 
         List<Character> teamACharacters = arena.getAllOfTeam("A").collect(Collectors.toList());
         Assert.assertEquals("number of characters in team A", 4, teamACharacters.size());
-        Assert.assertEquals("number of AntiMages in team A", 3, arena.getAllOfTeam("A")
-            .filter(character -> character instanceof AntiMage)
-            .peek(character -> Assert.assertEquals("AnitMage should have one ChanceOfBeingHitModifier", 1,
+        Assert.assertEquals("number of Elfs in team A", 3, arena.getAllOfTeam("A")
+            .filter(character -> character.getAbilities().anyMatch(ability -> ability instanceof Elf))
+            .peek(character -> Assert.assertEquals("Elf should have one ChanceOfBeingHitModifier", 1,
                 character.getModifiers().filter(modifier -> modifier instanceof ChanceOfBeingHitModifier).count()))
             .count());
         Assert.assertEquals("number of BatRider in team A", 1, arena.getAllOfTeam("A")
