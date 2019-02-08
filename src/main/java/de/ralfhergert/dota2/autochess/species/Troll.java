@@ -17,12 +17,7 @@ import java.util.stream.Collectors;
  */
 public class Troll extends Ability {
 
-    private static final AutoAttackSpeedModifier SPEED_MODIFIER = new AutoAttackSpeedModifier() {
-        @Override
-        public Long modify(Long duration) {
-            return (long)(duration / 1.35);
-        }
-    };
+    private static final AutoAttackSpeedModifier SPEED_MODIFIER = duration -> (long)(duration / 1.35);
 
     @Override
     public void initialize(Arena arena) {
