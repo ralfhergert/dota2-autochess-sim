@@ -5,7 +5,7 @@ import de.ralfhergert.dota2.autochess.ability.Ability;
 import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.modifier.AutoAttackSpeedModifier;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -21,22 +21,25 @@ public class Troll extends Ability {
 
     @Override
     public void initialize(Arena arena) {
-        final List<Character> trollsInTeam = arena.getAllOfTeam(getOwner().getTeam())
+        final Set<Class> trollClassesOnTheTeam = arena.getAllOfTeam(getOwner().getTeam())
             .filter(character -> character.getAbilities().anyMatch(ability -> ability instanceof Troll))
-            .collect(Collectors.toList());
+            .map(Character::getClass)
+            .collect(Collectors.toSet());
 
-        if (trollsInTeam.size() >= 4) {
+        if (trollClassesOnTheTeam.size() >= 4) {
             arena.getAllOfTeam(getOwner().getTeam()).forEach(character -> {
                 if (character.getModifiers().noneMatch(modifier -> modifier.equals(SPEED_MODIFIER))) {
                     character.addModifier(SPEED_MODIFIER);
                 }
             });
-        } else if (trollsInTeam.size() >= 2) {
-            trollsInTeam.forEach(character -> {
-                if (character.getModifiers().noneMatch(modifier -> modifier.equals(SPEED_MODIFIER))) {
-                    character.addModifier(SPEED_MODIFIER);
-                }
-            });
+        } else if (trollClassesOnTheTeam.size() >= 2) {
+            arena.getAllOfTeam(getOwner().getTeam())
+                .filter(character -> character.getAbilities().anyMatch(ability -> ability instanceof Troll))
+                .forEach(character -> {
+                    if (character.getModifiers().noneMatch(modifier -> modifier.equals(SPEED_MODIFIER))) {
+                        character.addModifier(SPEED_MODIFIER);
+                    }
+                });
         }
     }
 }
