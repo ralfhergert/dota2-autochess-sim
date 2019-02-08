@@ -2,6 +2,8 @@ package de.ralfhergert.dota2.autochess.species;
 
 import de.ralfhergert.dota2.autochess.Arena;
 import de.ralfhergert.dota2.autochess.character.Character;
+import de.ralfhergert.dota2.autochess.hero.DragonKnight;
+import de.ralfhergert.dota2.autochess.hero.Puck;
 import de.ralfhergert.dota2.autochess.hero.Viper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,7 +20,7 @@ public class DragonModifierTest {
     public void testDragonModifierIsNotAppliedForTwoDragons() {
         Arena arena = new Arena()
             .addCharacter(new Viper("A", 1))
-            .addCharacter(new Viper("A", 1))
+            .addCharacter(new Puck("A", 1))
             .initialize();
 
         List<Character> teamACharacters = arena.getAllOfTeam("A").collect(Collectors.toList());
@@ -32,8 +34,8 @@ public class DragonModifierTest {
     public void testDragonModifierIsAppliedForThreeDragons() {
         Arena arena = new Arena()
             .addCharacter(new Viper("A", 1))
-            .addCharacter(new Viper("A", 1))
-            .addCharacter(new Viper("A", 1))
+            .addCharacter(new Puck("A", 1))
+            .addCharacter(new DragonKnight("A", 1))
             .initialize();
 
         List<Character> teamACharacters = arena.getAllOfTeam("A").collect(Collectors.toList());
