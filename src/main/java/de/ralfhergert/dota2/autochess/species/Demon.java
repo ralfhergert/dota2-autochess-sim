@@ -29,7 +29,7 @@ public class Demon extends Ability {
             .map(Character::getClass)
             .collect(Collectors.toSet());
 
-        if (demonHunterClassesOnEnemyTeam.size() >= 1 && demonHunterClassesOnTeam.size() < 2) {
+        if (!demonHunterClassesOnEnemyTeam.isEmpty() && demonHunterClassesOnTeam.size() < 2) {
             return; // enemy demon hunter denies Fel Power.
         }
 
