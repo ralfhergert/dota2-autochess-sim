@@ -34,10 +34,10 @@ public class Elemental extends Ability {
             arena.getAllOfTeam(getOwner().getTeam())
                 .filter(character -> character.getAbilities().anyMatch(ability -> ability instanceof Elemental))
                 .forEach(character -> {
-                if (character.getAbilities().noneMatch(ability -> ability.equals(ELEMENTAL_RESISTANCE))) {
-                    character.addAbility(ELEMENTAL_RESISTANCE);
-                }
-            });
+                    if (character.getAbilities().noneMatch(ability -> ability.equals(ELEMENTAL_RESISTANCE))) {
+                        character.addAbility(ELEMENTAL_RESISTANCE);
+                    }
+                });
         }
     }
 }
