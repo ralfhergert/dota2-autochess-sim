@@ -1,8 +1,6 @@
 package de.ralfhergert.dota2.autochess.ability;
 
 import de.ralfhergert.dota2.autochess.Arena;
-import de.ralfhergert.dota2.autochess.ability.AutoAttackAbility;
-import de.ralfhergert.dota2.autochess.ability.ElementalResistance;
 import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.modifier.Stone;
 import de.ralfhergert.dota2.autochess.species.Elemental;
