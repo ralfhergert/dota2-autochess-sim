@@ -2,6 +2,10 @@ package de.ralfhergert.dota2.autochess.modifier;
 
 import de.ralfhergert.dota2.autochess.Arena;
 
+/**
+ * This modifier turns its owner into stone.
+ * @see de.ralfhergert.dota2.autochess.ability.ElementalResistance
+ */
 public class Stone implements CanAutoAttackModifier, CanMoveModifier {
 
     private final long lastUntilTick;
