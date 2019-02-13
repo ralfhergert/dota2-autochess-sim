@@ -27,6 +27,7 @@ public class AutoAttackAbility extends Ability implements DamageAbility {
         this.maxRange = maxRange;
     }
 
+    @Override
     public void initialize(Arena arena) {
         availableOnTick = getNextAvailabilityDelta();
         arena.registerTick(availableOnTick);
