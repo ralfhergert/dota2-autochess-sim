@@ -3,6 +3,7 @@ package de.ralfhergert.dota2.autochess.character;
 import de.ralfhergert.dota2.autochess.Arena;
 import de.ralfhergert.dota2.autochess.ability.Ability;
 import de.ralfhergert.dota2.autochess.ability.AutoAttackAbility;
+import de.ralfhergert.dota2.autochess.ability.HpRegenerationAbility;
 import de.ralfhergert.dota2.autochess.damage.AutoAttackDamage;
 import de.ralfhergert.dota2.autochess.damage.SpellDamage;
 import de.ralfhergert.dota2.autochess.event.CharacterBeingDamagedEvent;
@@ -10,6 +11,7 @@ import de.ralfhergert.dota2.autochess.event.CharacterBeingHitEvent;
 import de.ralfhergert.dota2.autochess.event.CharacterDiedEvent;
 import de.ralfhergert.dota2.autochess.event.CharacterEvadedAttackEvent;
 import de.ralfhergert.dota2.autochess.event.Event;
+import de.ralfhergert.dota2.autochess.modifier.ArmorModifier;
 import de.ralfhergert.dota2.autochess.modifier.ChanceOfBeingHitModifier;
 import de.ralfhergert.dota2.autochess.modifier.VisibilityModifier;
 import de.ralfhergert.dota2.autochess.modifier.Modifier;
@@ -50,6 +52,7 @@ public class Character {
         this.currentHealth = maxHealth;
         this.armor = armor;
         this.magicResistance = magicResistance;
+        addAbility(new HpRegenerationAbility(0));
     }
 
     public Character addAbility(Ability ability) {
@@ -134,7 +137,7 @@ public class Character {
 
         final AutoAttackDamage damage = applyModifiers(autoAttackDamage, ReceivingAutoAttackDamageModifier.class);
         final int healthBefore = currentHealth;
-        currentHealth -= Math.max(0, damage.getDamage() - getArmor());
+        currentHealth -= Math.max(0, damage.getDamage() - applyModifiers(armor, ArmorModifier.class));
         if (healthBefore > currentHealth) {
             arena.onEvent(new CharacterBeingDamagedEvent(arena, this, damage.getSource(), healthBefore - currentHealth));
         }
@@ -184,6 +187,10 @@ public class Character {
 
     public int getCurrentHealth() {
         return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
     }
 
     /**
