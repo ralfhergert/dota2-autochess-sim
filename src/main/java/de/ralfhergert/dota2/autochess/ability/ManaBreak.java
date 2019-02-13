@@ -39,9 +39,4 @@ public class ManaBreak extends Ability implements DamageAbility {
         }
         super.onEvent(event);
     }
-
-    @Override
-    public int getPotentialDamageVersus(Character character) {
-        return 0;
-    }
 }

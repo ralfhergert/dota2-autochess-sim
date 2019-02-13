@@ -1,10 +1,10 @@
 package de.ralfhergert.dota2.autochess.ability;
 
 import de.ralfhergert.dota2.autochess.Arena;
-import de.ralfhergert.dota2.autochess.character.Character;
 import de.ralfhergert.dota2.autochess.damage.AutoAttackDamage;
 import de.ralfhergert.dota2.autochess.modifier.AutoAttackDamageModifier;
 import de.ralfhergert.dota2.autochess.modifier.AutoAttackSpeedModifier;
+import de.ralfhergert.dota2.autochess.modifier.CanAutoAttackModifier;
 
 import java.util.Random;
 
@@ -18,6 +18,7 @@ public class AutoAttackAbility extends Ability implements DamageAbility {
     private long cooldownMs;
     private int maxRange;
     private long availableOnTick;
+    private AttackType attackType = AttackType.Melee;
 
     public AutoAttackAbility(int minDamage, int maxDamage, long cooldownMs, int maxRange) {
         this.minDamage = minDamage;
@@ -36,7 +37,8 @@ public class AutoAttackAbility extends Ability implements DamageAbility {
         if (getOwner().isAlive() &&
             getOwner().getCurrentTarget().isAlive() &&
             getOwner().getCurrentTarget().isVisible() &&
-            availableOnTick <= arena.getCurrentTickMs()) {
+            availableOnTick <= arena.getCurrentTickMs() &&
+            getOwner().applyModifiers(true, CanAutoAttackModifier.class)) {
             // try to inflict damage.
             getOwner().getCurrentTarget().tryToInflictDamage(arena, this, getOwner().applyModifiers(new AutoAttackDamage(getPotentialDamage(), getOwner()), AutoAttackDamageModifier.class));
             // calculate and register the next strike.
@@ -50,11 +52,10 @@ public class AutoAttackAbility extends Ability implements DamageAbility {
     }
 
     public int getPotentialDamage() {
-        return minDamage + new Random().nextInt(maxDamage - minDamage);
+        return minDamage + (maxDamage > minDamage ? new Random().nextInt(maxDamage - minDamage) : 0);
     }
 
-    @Override
-    public int getPotentialDamageVersus(Character character) {
-        return minDamage + new Random().nextInt(maxDamage - minDamage);
+    public AttackType getAttackType() {
+        return attackType;
     }
 }

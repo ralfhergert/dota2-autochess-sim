@@ -41,6 +41,7 @@ public class Character {
     private final List<Ability> abilities = new ArrayList<>();
     private final List<Modifier> modifiers = new ArrayList<>();
 
+    private Arena arena;
     private Character currentTarget = null;
 
     public Character(String team, int maxHealth, int armor, int magicResistance) {
@@ -63,6 +64,9 @@ public class Character {
 
     public Character addModifier(Modifier modifier) {
         modifiers.add(modifier);
+        if (arena != null) {
+            modifier.initialize(arena);
+        }
         return this;
     }
 
@@ -75,6 +79,7 @@ public class Character {
     }
 
     public Character initialize(Arena arena) {
+        this.arena = arena;
         abilities.forEach(ability -> ability.initialize(arena));
         modifiers.forEach(modifier -> modifier.initialize(arena));
         return this;
