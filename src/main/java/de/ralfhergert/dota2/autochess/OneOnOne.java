@@ -12,6 +12,8 @@ public class OneOnOne {
 
     private static final Logger LOG = LoggerFactory.getLogger(OneOnOne.class);
 
+    private OneOnOne() { /* no need to instantiate */ }
+
     public static void main(String... args) {
         Arena arena = new Arena()
             .addEventLogger(new EventLogger())
