@@ -139,7 +139,9 @@ public class Character {
 
         final AutoAttackDamage damage = applyModifiers(autoAttackDamage, ReceivingAutoAttackDamageModifier.class);
         final int healthBefore = currentHealth;
-        currentHealth -= Math.max(0, damage.getDamage() - applyModifiers(armor, ArmorModifier.class));
+        final double effectiveArmor = getArmor();
+        final double damageMultiplier = 1 - ((0.052 * effectiveArmor) / (0.9 + 0.048 * Math.abs(effectiveArmor)));
+        currentHealth -= Math.max(0, damage.getDamage() * damageMultiplier);
         if (healthBefore > currentHealth) {
             arena.onEvent(new CharacterBeingDamagedEvent(arena, this, damage.getSource(), healthBefore - currentHealth));
         }
@@ -169,8 +171,8 @@ public class Character {
         return this;
     }
 
-    public int getArmor() {
-        return armor;
+    public double getArmor() {
+        return applyModifiers(armor, ArmorModifier.class);
     }
 
     public Character onEvent(Event event) {
