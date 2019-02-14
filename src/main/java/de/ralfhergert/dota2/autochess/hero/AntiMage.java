@@ -14,7 +14,7 @@ import de.ralfhergert.dota2.autochess.species.Elf;
 public class AntiMage extends Character {
 
     public AntiMage(String team, int level) {
-        super(team, new DoubleEachLevel(level).of(500), 0, 10);
+        super(team, new DoubleEachLevel(level).of(500), 0, 0.1);
         addAbility(new Elf());
         addAbility(new DemonHunter());
         addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(45), new DoubleEachLevel(level).of(55), (long)(1000 / 1.2), 205));

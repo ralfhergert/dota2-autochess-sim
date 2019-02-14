@@ -13,7 +13,7 @@ import de.ralfhergert.dota2.autochess.species.Dragon;
 public class Viper extends Character {
 
     public Viper(String team, int level) {
-        super(team, new DoubleEachLevel(level).of(550), 5, 20);
+        super(team, new DoubleEachLevel(level).of(550), 5, 0.2);
         addAbility(new Dragon());
         addAbility(new Assassin());
         addAbility(new AutoAttackAbility(new DoubleEachLevel(level).of(50), new DoubleEachLevel(level).of(60), (long)(1000 / 1.0), 400));

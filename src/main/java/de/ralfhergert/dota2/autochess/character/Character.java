@@ -13,6 +13,7 @@ import de.ralfhergert.dota2.autochess.event.CharacterEvadedAttackEvent;
 import de.ralfhergert.dota2.autochess.event.Event;
 import de.ralfhergert.dota2.autochess.modifier.ArmorModifier;
 import de.ralfhergert.dota2.autochess.modifier.ChanceOfBeingHitModifier;
+import de.ralfhergert.dota2.autochess.modifier.MagicResistanceModifier;
 import de.ralfhergert.dota2.autochess.modifier.VisibilityModifier;
 import de.ralfhergert.dota2.autochess.modifier.Modifier;
 import de.ralfhergert.dota2.autochess.modifier.ReceivingAutoAttackDamageModifier;
@@ -36,7 +37,7 @@ public class Character {
     private int maxHealth;
     private int currentHealth;
     private int armor;
-    private int magicResistance;
+    private double magicResistance;
     private int currentMana;
     private int maxMana = 100;
 
@@ -46,7 +47,7 @@ public class Character {
     private Arena arena;
     private Character currentTarget = null;
 
-    public Character(String team, int maxHealth, int armor, int magicResistance) {
+    public Character(String team, int maxHealth, int armor, double magicResistance) {
         this.team = team;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
@@ -152,8 +153,12 @@ public class Character {
         arena.onEvent(new CharacterBeingHitEvent(arena, this, ability));
         SpellDamage damage = applyModifiers(spellDamage, ReceivingSpellDamageModifier.class);
 
+        final double magicResistance = applyModifiers(this.magicResistance, MagicResistanceModifier.class);
+        if (magicResistance >= 1) {
+            return this; // character is immune to magic damage.
+        }
         final int healthBefore = currentHealth;
-        currentHealth -= Math.max(0, damage.getDamage());
+        currentHealth -= Math.max(0, damage.getDamage() * (1 - magicResistance));
         if (healthBefore > currentHealth) {
             arena.onEvent(new CharacterBeingDamagedEvent(arena, this, damage.getSource(), healthBefore - currentHealth));
         }
