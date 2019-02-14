@@ -14,6 +14,7 @@ import de.ralfhergert.dota2.autochess.event.Event;
 import de.ralfhergert.dota2.autochess.modifier.ArmorModifier;
 import de.ralfhergert.dota2.autochess.modifier.ChanceOfBeingHitModifier;
 import de.ralfhergert.dota2.autochess.modifier.MagicResistanceModifier;
+import de.ralfhergert.dota2.autochess.modifier.MaxHealthModifier;
 import de.ralfhergert.dota2.autochess.modifier.VisibilityModifier;
 import de.ralfhergert.dota2.autochess.modifier.Modifier;
 import de.ralfhergert.dota2.autochess.modifier.ReceivingAutoAttackDamageModifier;
@@ -191,7 +192,7 @@ public class Character {
     }
 
     public int getMaxHealth() {
-        return maxHealth;
+        return applyModifiers(maxHealth, MaxHealthModifier.class);
     }
 
     public int getCurrentHealth() {
@@ -219,7 +220,7 @@ public class Character {
     public String toString() {
         return getClass().getSimpleName() + "{" +
             "team='" + team + '\'' +
-            ", health=" + currentHealth + "/" + maxHealth +
+            ", health=" + currentHealth + "/" + getMaxHealth() +
             ", mana=" + currentMana + "/" + maxMana +
             ", armor=" + armor +
             ", magicResistance=" + magicResistance +
