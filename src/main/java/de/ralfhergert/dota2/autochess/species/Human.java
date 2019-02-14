@@ -2,7 +2,6 @@ package de.ralfhergert.dota2.autochess.species;
 
 import de.ralfhergert.dota2.autochess.Arena;
 import de.ralfhergert.dota2.autochess.ability.Ability;
-import de.ralfhergert.dota2.autochess.ability.ElementalResistance;
 import de.ralfhergert.dota2.autochess.ability.Persuasion;
 import de.ralfhergert.dota2.autochess.character.Character;
 
@@ -35,7 +34,7 @@ public class Human extends Ability {
                     if (character.getAbilities().noneMatch(ability -> ability.equals(PERSUASION_2))) {
                         character.addAbility(PERSUASION_2);
                     }
-            });
+                });
         }
         if (humanClassesOnTheTeam.size() >= 4) {
             arena.getAllOfTeam(getOwner().getTeam())
@@ -44,7 +43,7 @@ public class Human extends Ability {
                     if (character.getAbilities().noneMatch(ability -> ability.equals(PERSUASION_4))) {
                         character.addAbility(PERSUASION_4);
                     }
-            });
+                });
         }
         if (humanClassesOnTheTeam.size() >= 6) {
             arena.getAllOfTeam(getOwner().getTeam())
@@ -53,7 +52,7 @@ public class Human extends Ability {
                     if (character.getAbilities().noneMatch(ability -> ability.equals(PERSUASION_6))) {
                         character.addAbility(PERSUASION_6);
                     }
-            });
+                });
         }
     }
 }
