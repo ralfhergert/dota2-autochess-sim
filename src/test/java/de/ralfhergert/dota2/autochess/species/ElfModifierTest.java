@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * This test ensures that the {@link Elf}-species modifier iw working correctly.
+ * This test ensures that the {@link Elf}-species modifier is working correctly.
  */
 public class ElfModifierTest {
 
