@@ -1,8 +1,10 @@
 package de.ralfhergert.dota2.autochess.modifier;
 
+import de.ralfhergert.dota2.autochess.classes.Mech;
+
 /**
  * SelfRepair increases the HP regeneration by a given amount.
- * It is granted by {@link de.ralfhergert.dota2.autochess.species.Mech}.
+ * It is granted by {@link Mech}.
  */
 public class SelfRepair implements HpRegenerationModifier {
 
