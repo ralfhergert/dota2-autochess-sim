@@ -85,7 +85,8 @@ public class Character {
 
     public Character initialize(Arena arena) {
         this.arena = arena;
-        abilities.forEach(ability -> ability.initialize(arena));
+        // abilities may add further abilities when being initialized.
+        new ArrayList<>(abilities).forEach(ability -> ability.initialize(arena));
         modifiers.forEach(modifier -> modifier.initialize(arena));
         return this;
     }
