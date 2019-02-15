@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 
 /**
  * Adds a chance for critical damage.
- *  - 3 Assassins on board grants all assassins a 10% to deal 4x damage;
- *  - 6 Assassins on board grants all assassins a 20% to deal 4x damage;
+ *  - 3 Assassins on board grants all assassins a +10% to deal 4x damage;
+ *  - 6 Assassins on board grants all assassins a +20% to deal 4x damage;
  */
 public class Assassin extends Ability {
 
     private static final AutoAttackDamageModifier BONUS_FOR_3 = new CoupDeGrace(0.1);
-    private static final AutoAttackDamageModifier BONUS_FOR_6 = new CoupDeGrace(0.2);
+    private static final AutoAttackDamageModifier BONUS_FOR_6 = new CoupDeGrace(0.3);
 
     @Override
     public void initialize(Arena arena) {
